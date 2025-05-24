@@ -20,7 +20,7 @@ function App() {
   return (
     <div className='game'>
       <header>
-        <h1> Juego de memoria </h1>
+        <h1 className='titulo'> Juego de memoria </h1>
         <hr />
       </header>
 

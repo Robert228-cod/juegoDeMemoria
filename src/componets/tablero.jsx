@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Tableros } from './tableros';
 
 export const Tablero = ({cuadros = [], nuevoTablero = [], timer, setNuevoTablero, setTimer, movimientos = 0, setMovimientos}) => {
-    
+
     const [jugadas, setJugadas] = useState([])
     const [indices, setIndices] = useState([])
     const [contador, setContador] = useState(0)
+    const [estadoBoton, setEstadoBoton] = useState('')
 
     const mezclar = () =>{
         const copia = [...cuadros];
@@ -16,6 +17,7 @@ export const Tablero = ({cuadros = [], nuevoTablero = [], timer, setNuevoTablero
         setNuevoTablero(copia)
         setTimer(true)
         ocultar(copia)
+        setEstadoBoton(true)
         }
 
     const ocultar = (cuadros) =>{
@@ -28,13 +30,19 @@ export const Tablero = ({cuadros = [], nuevoTablero = [], timer, setNuevoTablero
         if(contador === 8) return
         if(jugadas.length < 2) {
             const elemento = document.getElementById(index)
-            elemento.style.display = ''
-            setMovimientos(movimientos+1)
-            setJugadas([...jugadas,nuevoTablero[index]])
-            setIndices([index,...indices])
-            console.log(index)
+            if(elemento.style.display !== ''){
+                elemento.style.display = ''
+                setMovimientos(movimientos+1)
+                setJugadas([...jugadas,nuevoTablero[index]])
+                setIndices([index,...indices])
+                console.log(index)
+            }else{
+                return
+            }
+            
         }
     }
+
     useEffect(() => {
         if(movimientos === 0) return
         const a = jugadas[0]
@@ -69,7 +77,7 @@ export const Tablero = ({cuadros = [], nuevoTablero = [], timer, setNuevoTablero
 
   return (
     <>
-        <button onClick={ mezclar }>Iniciar</button>
+        <button disabled={estadoBoton} onClick={ mezclar }>Iniciar</button>
         <Tableros
             timer={timer}
             cuadros={cuadros}

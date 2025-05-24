@@ -19,3 +19,9 @@
     text-align: center;
     border: 1px solid red;
 }
+.titulo {
+    font-family: 'Times New Roman', Times, serif;
+}
+.carta {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+}
