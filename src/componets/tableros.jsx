@@ -16,7 +16,7 @@ export const Tableros = ({timer, cuadros, nuevoTablero, mostrarFigura}) => {
                 }) :
                 nuevoTablero.map( (icon, index) => {
                     return (
-                        <div className='tablero'  key={index} onClick={() => mostrarFigura(index)}>
+                        <div className='tablero' key={index} onClick={() => mostrarFigura(index)}>
                             <span className='carta' id={index}>
                                 {icon}
                             </span>

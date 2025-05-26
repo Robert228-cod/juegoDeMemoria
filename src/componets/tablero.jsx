@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Tableros } from './tableros';
 
-export const Tablero = ({cuadros = [], nuevoTablero = [], timer, setNuevoTablero, setTimer, movimientos = 0, setMovimientos}) => {
+export const Tablero = ({cuadros = [], nuevoTablero = [], timer, setNuevoTablero, setTimer, movimientos = 0, setMovimientos, settiempoSeg, settimepoMin}) => {
 
     const [jugadas, setJugadas] = useState([])
     const [indices, setIndices] = useState([])
@@ -35,12 +35,22 @@ export const Tablero = ({cuadros = [], nuevoTablero = [], timer, setNuevoTablero
                 setMovimientos(movimientos+1)
                 setJugadas([...jugadas,nuevoTablero[index]])
                 setIndices([index,...indices])
-                console.log(index)
+                //console.log(index)
             }else{
                 return
             }
             
         }
+    }
+    const reiniciar = () => {
+        setJugadas([])
+        setIndices([])
+        setContador(0)
+        setEstadoBoton('')
+        setMovimientos(0)
+        setTimer(false)
+        settiempoSeg(0)
+        settimepoMin(0)
     }
 
     useEffect(() => {
@@ -49,34 +59,42 @@ export const Tablero = ({cuadros = [], nuevoTablero = [], timer, setNuevoTablero
         const b = jugadas[1]
         if(jugadas.length === 2){
             if(a === b){
-                console.log("son iguales")  
+                //console.log("son iguales")
+                const a = document.getElementById(indices[0])
+                const b = document.getElementById(indices[1])
+                a.style.color = "green"
+                b.style.color = "green"
                 setContador(contador + 1)
                 setJugadas([]) 
                 if(contador === 7){
-                    console.log("juego terminado")
-                    alert("Juego terminado")
+                    //console.log("juego terminado")
+                    alert("juegos terminado")
+                    setTimer(false)
                     return
                 }
             }
             else{
-                console.log(" no son iguales")
+                //console.log("no son iguales")
                 const a = document.getElementById(indices[0])
                 const b = document.getElementById(indices[1])
+                a.style.color = 'red'
+                b.style.color = 'red'
                 if(jugadas.length === 2){
                     setTimeout(() => {
                         a.style.display = 'none'
                         b.style.display = 'none'
+                        a.style.color = 'white'
+                        b.style.color = 'white'
                         setJugadas([])
                     }, 1000);
                 }
             }
         }
-        
     }, [movimientos,jugadas])
     
 
   return (
-    <>
+    <div className='juego'>
         <button disabled={estadoBoton} onClick={ mezclar }>Iniciar</button>
         <Tableros
             timer={timer}
@@ -84,6 +102,13 @@ export const Tablero = ({cuadros = [], nuevoTablero = [], timer, setNuevoTablero
             nuevoTablero={nuevoTablero}
             mostrarFigura={mostrarFigura}
         />
-    </>
+        {
+            contador === 8 && (
+                <div className='reset' onClick={reiniciar}>
+                    <button> Reiniciar </button>
+                </div>
+            )
+        }
+    </div>
   )
 }

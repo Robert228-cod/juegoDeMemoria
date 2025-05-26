@@ -2,6 +2,10 @@
     display: grid;
     min-height: 92dvh;
     grid-template-rows: auto 1fr auto;
+    border: 1px solid aqua;
+    border-radius: 10%;
+    padding-inline: 100px; 
+    background-color: rgb(21, 21, 70);
 }
 .estadisticas {
     display: flex;
@@ -17,11 +21,19 @@
     min-width: 20px;
     min-height: 25px;
     text-align: center;
-    border: 1px solid red;
+    border: 1px solid blue;
+    border-radius: 10%;
 }
 .titulo {
     font-family: 'Times New Roman', Times, serif;
 }
 .carta {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+}
+.footr {
+    display: grid;
+    padding-bottom: 20px;
+}
+.reset {
+    margin-top: 20px;
 }

@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { useTimer } from './hooks/useTimer'
 import { Tablero } from './componets/tablero'
+import { Temporizador } from './componets/temporizador'
 import './styles/mainStyles.css'
 import './App.css'
 
-const cuadros = [
-  1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8
-]
 
+
+const cuadros = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8]
 
 function App() {
   
@@ -15,7 +15,7 @@ function App() {
 
   const [movimientos, setMovimientos] = useState(0)
   
-  const {setTimer , tiempoMin, tiempoSeg, timer} = useTimer(0) 
+  const {setTimer , tiempoMin, tiempoSeg, setTiempoMin, setTiempoSeg, timer} = useTimer(0) 
 
   return (
     <div className='game'>
@@ -25,10 +25,11 @@ function App() {
       </header>
 
       <main>
-        <div className='estadisticas'>
-          <h2>tiempo: {tiempoMin < 10 && 0}{ tiempoMin }:{tiempoSeg < 10 && 0}{ tiempoSeg }</h2>
-          <h2>Movimientos: { movimientos }</h2>
-        </div>
+        <Temporizador
+          tiempoMin={tiempoMin}
+          tiempoSeg={tiempoSeg}
+          movimientos={movimientos}
+        />
         <Tablero 
           cuadros={cuadros}
           nuevoTablero={nuevoTablero}
@@ -37,10 +38,12 @@ function App() {
           setTimer={setTimer}
           movimientos={movimientos}
           setMovimientos={setMovimientos}
+          settiempoSeg={setTiempoSeg}
+          settimepoMin={setTiempoMin}
         />
       </main>
 
-      <footer>
+      <footer className='footr'>
         version 1.0.0
       </footer>
     </div>

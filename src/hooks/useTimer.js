@@ -5,7 +5,7 @@ export const useTimer = (initialTimer = 0) => {
     const [tiempoMin, setTiempoMin] = useState(0)
 
     const [timer, setTimer] = useState(false)
-
+    
     const iniciarCrono = () => {
         setTimer(true)
     }
@@ -29,6 +29,8 @@ export const useTimer = (initialTimer = 0) => {
     tiempoSeg,
     tiempoMin,
     setTimer,
-    timer
+    timer,
+    setTiempoMin,
+    setTiempoSeg
   }
 }
